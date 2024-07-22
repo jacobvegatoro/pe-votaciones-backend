@@ -1,42 +1,17 @@
-package com.puertoesp.votaciones.models.entity;
+package com.puertoesp.votaciones.boletas.models;
 
-import java.io.Serializable;
 import java.util.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-import jakarta.persistence.Transient;
+public class Consulta {
 
-@Entity
-@Table(name="consultas")
-public class Consulta implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String titulo;
     private String detalle;
-
-    @Column(name = "fecha_inicio")
-    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaInicio;
-
-    @Column(name = "fecha_fin")
-    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaFin;
-
     private Integer estado;
-
-    @Transient //este atributo no será persistente 
     private Integer port;
-
+    
     public Long getId() {
         return id;
     }
@@ -73,7 +48,6 @@ public class Consulta implements Serializable {
     public void setEstado(Integer estado) {
         this.estado = estado;
     }
-
     public Integer getPort() {
         return port;
     }
@@ -81,6 +55,5 @@ public class Consulta implements Serializable {
         this.port = port;
     }
 
-    private static final long serialVersionUID = 42L;
     
 }

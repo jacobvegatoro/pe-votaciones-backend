@@ -9,7 +9,8 @@ public class Consulta {
     private String detalle;
     private Date fechaInicio;
     private Date fechaFin;
-    private int estado;
+    private Integer estado;
+    private Integer port;
     
     public Long getId() {
         return id;
@@ -41,13 +42,17 @@ public class Consulta {
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
     }
-    public int getEstado() {
+    public Integer getEstado() {
         return estado;
     }
-    public void setEstado(int estado) {
+    public void setEstado(Integer estado) {
         this.estado = estado;
     }
-
+    public Integer getPort() {
+        return port;
+    }
+    public void setPort(Integer port) {
+        this.port = port;
+    }
     
-
 }
