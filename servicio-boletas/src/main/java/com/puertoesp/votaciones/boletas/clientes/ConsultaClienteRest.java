@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.puertoesp.votaciones.boletas.models.Consulta;
 
-@FeignClient(name = "servicio-consultas", url = "localhost:8001")
+//@FeignClient(name = "servicio-consultas", url = "localhost:8001")
+@FeignClient(name = "servicio-consultas")
 public interface ConsultaClienteRest {
 
     @GetMapping("/listar")
