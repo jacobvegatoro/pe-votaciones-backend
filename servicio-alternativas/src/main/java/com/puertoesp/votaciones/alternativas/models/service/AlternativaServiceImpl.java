@@ -21,7 +21,8 @@ public class AlternativaServiceImpl implements AlternativaService {
 
     @Override
     public List<Alternativa> getAll() {
-        List<Consulta> consultas = Arrays.asList(clienteRest.getForObject("http://localhost:8001/listar", Consulta[].class));
+        //List<Consulta> consultas = Arrays.asList(clienteRest.getForObject("http://localhost:8001/listar", Consulta[].class));
+        List<Consulta> consultas = Arrays.asList(clienteRest.getForObject("http://localhost:8090/api/consultas/listar", Consulta[].class));
         return consultas.stream().map(c -> new Alternativa(c, "Texto alternativa",1)).collect(Collectors.toList());
     }
 
@@ -29,7 +30,8 @@ public class AlternativaServiceImpl implements AlternativaService {
     public Alternativa getById(Long id, String texto, Integer estado) {
         Map<String,String> pathVariables = new HashMap<String, String>();
         pathVariables.put("id", id.toString());
-        Consulta consulta = clienteRest.getForObject("http://localhost:8001/ver/{id}", Consulta.class, pathVariables);
+        //Consulta consulta = clienteRest.getForObject("http://localhost:8001/ver/{id}", Consulta.class, pathVariables);
+        Consulta consulta = clienteRest.getForObject("http://localhost:8090/api/consultas/ver/{id}", Consulta.class, pathVariables);
         return new Alternativa(consulta, texto, estado);
     }
 

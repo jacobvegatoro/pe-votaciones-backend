@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: servicio-consultas
+        uri: lb://servicio-consultas
+        predicates:
+          - Path=/api/consultas/**
+        filters:
+          - StripPrefix=2
+      - id: servicio-alternativas
+        uri: lb://servicio-alternativas
+        predicates:
+          - Path=/api/alternativas/**
+        filters:
+          - StripPrefix=2
+      - id: servicio-boletas
+        uri: lb://servicio-boletas
+        predicates:
+          - Path=/api/boletas/**
+        filters:
+          - StripPrefix=2
