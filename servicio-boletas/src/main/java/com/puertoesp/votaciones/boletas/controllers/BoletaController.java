@@ -51,7 +51,8 @@ public class BoletaController {
         return boletaService.getById(id, texto);
     }
     
-    @TimeLimiter(name="boletas", fallbackMethod = "metodoAlternativo2")
+    @CircuitBreaker(name="boletas", fallbackMethod = "metodoAlternativo2")
+    @TimeLimiter(name="boletas")
     @GetMapping("/ver3/{id}/texto/{texto}")
     public CompletableFuture<Boleta> detalle3(@PathVariable Long id, @PathVariable String texto) {
         return CompletableFuture.supplyAsync(() -> boletaService.getById(id, texto));
