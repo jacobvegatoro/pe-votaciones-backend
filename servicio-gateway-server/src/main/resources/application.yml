@@ -48,7 +48,7 @@ spring:
           - StripPrefix=2
           - AddRequestHeader=token-request, 123456
           - AddResponseHeader=token-response, 789123
-          - SetResponseHeader=Content-Type, text/plain
+#          - SetResponseHeader=Content-Type, text/plain
           - AddRequestParameter=nombre, andres
       - id: servicio-boletas
         uri: lb://servicio-boletas

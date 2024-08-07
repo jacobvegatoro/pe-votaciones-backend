@@ -27,5 +27,17 @@ public class ConsultaServiceImpl implements IConsultaService {
         return consultaRepository.findById(id).orElse(null);
     }
 
+    @Override
+    @Transactional
+    public Consulta create(Consulta consulta) {
+        return consultaRepository.save(consulta);
+    }
+
+    @Override
+    @Transactional
+    public void dropById(Long id) {
+        consultaRepository.deleteById(id);
+    }
+
 }
 

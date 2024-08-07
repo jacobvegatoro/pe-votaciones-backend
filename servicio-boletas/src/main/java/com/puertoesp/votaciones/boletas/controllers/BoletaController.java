@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.puertoesp.votaciones.boletas.models.Boleta;
@@ -17,8 +18,13 @@ import com.puertoesp.votaciones.boletas.models.service.BoletaService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 @RestController
@@ -26,6 +32,7 @@ public class BoletaController {
 
     private final Logger logger = LoggerFactory.getLogger(BoletaController.class);
 
+    @SuppressWarnings("rawtypes")
     @Autowired
     private CircuitBreakerFactory cbFactory;
 
@@ -56,6 +63,24 @@ public class BoletaController {
     @GetMapping("/ver3/{id}/texto/{texto}")
     public CompletableFuture<Boleta> detalle3(@PathVariable Long id, @PathVariable String texto) {
         return CompletableFuture.supplyAsync(() -> boletaService.getById(id, texto));
+    }
+
+    @PostMapping("/crear")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Consulta crear(@RequestBody Consulta consulta) {        
+        return boletaService.create(consulta);
+    }
+    
+    @PutMapping("/editar/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Consulta editar(@RequestBody Consulta consulta, @PathVariable Long id) {
+        return boletaService.update(consulta, id);
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminar(@PathVariable Long id) {
+        boletaService.dropById(id);
     }
 
     public Boleta metodoAlternativo(Long id, String texto, Throwable e){

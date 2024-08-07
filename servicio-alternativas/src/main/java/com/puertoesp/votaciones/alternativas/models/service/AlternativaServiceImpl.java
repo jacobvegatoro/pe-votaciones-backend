@@ -7,6 +7,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -33,6 +36,34 @@ public class AlternativaServiceImpl implements AlternativaService {
         //Consulta consulta = clienteRest.getForObject("http://localhost:8001/ver/{id}", Consulta.class, pathVariables);
         Consulta consulta = clienteRest.getForObject("http://localhost:8090/api/consultas/ver/{id}", Consulta.class, pathVariables);
         return new Alternativa(consulta, texto, estado);
+    }
+
+    @Override
+    public Consulta create(Consulta consulta) {
+        HttpEntity<Consulta> body = new HttpEntity<Consulta>(consulta);
+        ResponseEntity<Consulta> response = clienteRest.exchange("http://localhost:8090/api/consultas/crear",
+            HttpMethod.POST, body, Consulta.class);
+        Consulta consultaResponse = response.getBody();
+        return consultaResponse;
+    }
+
+    @Override
+    public Consulta update(Consulta consulta, Long id) {
+
+        Map<String,String> pathVariables = new HashMap<String, String>();
+        pathVariables.put("id", id.toString());
+        HttpEntity<Consulta> body = new HttpEntity<Consulta>(consulta);
+        ResponseEntity<Consulta> response = clienteRest.exchange("http://localhost:8090/api/consultas/editar/{id}",
+            HttpMethod.PUT, body, Consulta.class, pathVariables);
+
+        return response.getBody();
+    }
+
+    @Override
+    public void dropById(Long id) {
+        Map<String,String> pathVariables = new HashMap<String, String>();
+        pathVariables.put("id", id.toString());
+        clienteRest.delete("http://localhost:8090/api/consultas/eliminar/{id}", pathVariables);
     }
 
 

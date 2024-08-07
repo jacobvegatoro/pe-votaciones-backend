@@ -3,14 +3,22 @@ package com.puertoesp.votaciones.alternativas.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.puertoesp.votaciones.alternativas.models.Alternativa;
+import com.puertoesp.votaciones.alternativas.models.Consulta;
 import com.puertoesp.votaciones.alternativas.models.service.AlternativaService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 public class AlternativaController {
@@ -32,6 +40,23 @@ public class AlternativaController {
     public Alternativa detalle(@PathVariable Long id, @PathVariable String texto, @PathVariable Integer estado) {
         return alternativaService.getById(id, texto, estado);
     }
+
+    @PostMapping("/crear")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Consulta crear(@RequestBody Consulta consulta) {        
+        return alternativaService.create(consulta);
+    }
     
+    @PutMapping("/editar/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Consulta editar(@RequestBody Consulta consulta, @PathVariable Long id) {
+        return alternativaService.update(consulta, id);
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminar(@PathVariable Long id) {
+        alternativaService.dropById(id);
+    }
 
 }
