@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.puertoesp.votaciones</groupId>
-	<artifactId>servicio-eureka</artifactId>
+	<artifactId>servicio-eureka-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>servicio-eureka</name>
+	<name>servicio-eureka-server</name>
 	<description>Servidor Eureka para servicios de votación</description>
 	<url/>
 	<licenses>
