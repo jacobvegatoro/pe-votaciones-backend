@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.puertoesp.votaciones.boletas.clientes.ConsultaClienteRest;
 import com.puertoesp.votaciones.boletas.models.Boleta;
-import com.puertoesp.votaciones.boletas.models.Consulta;
+import com.puertoesp.votaciones.commons.models.entity.Consulta;
 
 @Service("serviceFeign") //alternativa a Primary
 @Primary //esto se incluye en caso que tenga más de una interface, y quiero definir cuál se usará por defecto

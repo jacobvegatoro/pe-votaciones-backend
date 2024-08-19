@@ -3,7 +3,7 @@ package com.puertoesp.votaciones.boletas.models.service;
 import java.util.List;
 
 import com.puertoesp.votaciones.boletas.models.Boleta;
-import com.puertoesp.votaciones.boletas.models.Consulta;
+import com.puertoesp.votaciones.commons.models.entity.Consulta;
 
 public interface BoletaService {
 

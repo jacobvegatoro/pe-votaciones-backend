@@ -1,5 +1,7 @@
 package com.puertoesp.votaciones.boletas.models;
 
+import com.puertoesp.votaciones.commons.models.entity.Consulta;
+
 public class Boleta {
 
     private Consulta consulta;

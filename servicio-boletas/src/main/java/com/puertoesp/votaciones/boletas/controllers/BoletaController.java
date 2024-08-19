@@ -12,8 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.puertoesp.votaciones.boletas.models.Boleta;
-import com.puertoesp.votaciones.boletas.models.Consulta;
 import com.puertoesp.votaciones.boletas.models.service.BoletaService;
+import com.puertoesp.votaciones.commons.models.entity.Consulta;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.timelimiter.annotation.TimeLimiter;

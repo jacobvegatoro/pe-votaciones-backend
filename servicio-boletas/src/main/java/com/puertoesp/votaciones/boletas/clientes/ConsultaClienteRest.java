@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.puertoesp.votaciones.boletas.models.Consulta;
+import com.puertoesp.votaciones.commons.models.entity.Consulta;
+
 
 //@FeignClient(name = "servicio-consultas", url = "localhost:8001")
 @FeignClient(name = "servicio-consultas")

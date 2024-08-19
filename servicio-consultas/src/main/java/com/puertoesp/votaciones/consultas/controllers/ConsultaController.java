@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.puertoesp.votaciones.consultas.models.entity.Consulta;
+import com.puertoesp.votaciones.commons.models.entity.Consulta;
 import com.puertoesp.votaciones.consultas.models.service.IConsultaService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

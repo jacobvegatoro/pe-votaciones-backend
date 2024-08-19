@@ -2,7 +2,7 @@ package com.puertoesp.votaciones.consultas.models.service;
 
 import java.util.List;
 
-import com.puertoesp.votaciones.consultas.models.entity.Consulta;
+import com.puertoesp.votaciones.commons.models.entity.Consulta;
 
 public interface IConsultaService {
 
