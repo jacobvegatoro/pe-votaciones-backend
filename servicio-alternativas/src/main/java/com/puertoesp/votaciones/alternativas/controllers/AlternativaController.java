@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.puertoesp.votaciones.alternativas.models.Alternativa;
+import com.puertoesp.votaciones.alternativas.models.AlternativaDAO;
 import com.puertoesp.votaciones.alternativas.models.Consulta;
 import com.puertoesp.votaciones.alternativas.models.service.AlternativaService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,6 +58,34 @@ public class AlternativaController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void eliminar(@PathVariable Long id) {
         alternativaService.dropById(id);
+    }
+
+    @GetMapping("/listaralternativas")
+    public List<Alternativa> listarnuevo(){
+        return alternativaService.obtenerTodo();
+    }
+
+    @PostMapping("/crearalternativa")
+    @ResponseStatus(HttpStatus.CREATED)
+    public AlternativaDAO crearnuevo(@RequestBody AlternativaDAO alternativaDAO) {        
+        return alternativaService.crear(alternativaDAO);
+    }
+
+    @GetMapping("/ver/{id}")
+    public Alternativa getByIdFromDb(@PathVariable Long id) {
+        return alternativaService.obtenerPorId(id);
+    }
+
+    @PutMapping("/editaralternativa/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public AlternativaDAO editarnuevo(@PathVariable Long id, @RequestBody AlternativaDAO alternativaDAO) {        
+        return alternativaService.actualizar(id, alternativaDAO);
+    }
+
+    @DeleteMapping("/eliminaralternativa/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminaralternativa(@PathVariable Long id) {
+        alternativaService.eliminar(id);
     }
 
 }

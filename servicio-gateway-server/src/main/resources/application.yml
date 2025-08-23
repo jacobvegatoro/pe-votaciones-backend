@@ -32,7 +32,7 @@ spring:
             args:
               name: consultas
               statusCodes: 500
-#              fallbackUri: forward:/api/boletas/ver/9/texto/5
+              fallbackUri: forward:/api/boletas/ver/9/texto/circuit
           - StripPrefix=2
           - EjemploCookie=Hola mi mensaje personalizado, usuario, JacobVega
 #          - name: Ejemplo

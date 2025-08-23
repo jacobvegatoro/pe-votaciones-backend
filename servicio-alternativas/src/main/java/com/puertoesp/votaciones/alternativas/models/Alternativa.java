@@ -2,13 +2,15 @@ package com.puertoesp.votaciones.alternativas.models;
 
 public class Alternativa {
 
+    private Long id;
     private Consulta consulta;
     private String texto;
     private Integer estado;
 
     public Alternativa() {}
 
-    public Alternativa(Consulta consulta, String texto, Integer estado) {
+    public Alternativa(Long id, Consulta consulta, String texto, Integer estado) {
+        this.id = id;
         this.consulta = consulta;
         this.texto = texto;
         this.estado = estado;
@@ -32,7 +34,11 @@ public class Alternativa {
     public void setEstado(Integer estado) {
         this.estado = estado;
     }
-
-    
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 }

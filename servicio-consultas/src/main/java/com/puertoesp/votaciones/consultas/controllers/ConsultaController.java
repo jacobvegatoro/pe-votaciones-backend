@@ -47,11 +47,11 @@ public class ConsultaController {
     @GetMapping("/ver/{id}")
     public Consulta detalle(@PathVariable Long id) throws InterruptedException{
 
-        /*if (id.equals(10L)){
+        if (id.equals(10L)){
             throw new IllegalStateException("Producto no encontrado!");
         }
 
-        if (id.equals(3L)){
+        /*if (id.equals(3L)){
             TimeUnit.SECONDS.sleep(5L);
         }*/
 
