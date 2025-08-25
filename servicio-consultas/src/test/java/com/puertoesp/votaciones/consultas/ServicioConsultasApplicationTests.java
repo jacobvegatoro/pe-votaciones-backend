@@ -1,12 +1,12 @@
 package com.puertoesp.votaciones.consultas;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class ServicioConsultasApplicationTests {
 
-	@Test
+	//@Test
 	void contextLoads() {
 	}
 

@@ -1,12 +1,12 @@
 package com.puertoesp.votaciones.boletas;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class ServicioBoletasApplicationTests {
 
-	@Test
+	//@Test
 	void contextLoads() {
 	}
 

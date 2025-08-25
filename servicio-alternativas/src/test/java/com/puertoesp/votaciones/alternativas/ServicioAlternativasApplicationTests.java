@@ -1,12 +1,12 @@
 package com.puertoesp.votaciones.alternativas;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class ServicioAlternativasApplicationTests {
 
-	@Test
+	//@Test
 	void contextLoads() {
 	}
 

@@ -1,0 +1,108 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: admin123
+      MYSQL_DATABASE: bdvotaciones
+    ports:
+      - "3306:3306"
+    restart: always
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_DB: bdvotaciones
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin123
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  eureka-server:
+    build:
+      context: ./servicio-eureka-server
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    depends_on:
+      - mysql
+      - postgres
+
+  servicio-consultas:
+    build:
+      context: ./servicio-consultas
+    container_name: servicio-consultas
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/bdvotaciones?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=admin123
+      - EUREKA_SERVICE_URL=http://eureka-server:8761/eureka
+      - EUREKA_INSTANCE_HOSTNAME=servicio-consultas
+    depends_on:
+      - mysql
+      - eureka-server
+
+  servicio-alternativas:
+    build:
+      context: ./servicio-alternativas
+    container_name: servicio-alternativas
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/bdvotaciones
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin123
+      - EUREKA_SERVICE_URL=http://eureka-server:8761/eureka
+      - EUREKA_INSTANCE_HOSTNAME=servicio-alternativas
+      - consulta.service.url=http://servicio-gateway-server:8090
+    depends_on:
+      - postgres
+      - eureka-server
+      - servicio-consultas
+
+  servicio-boletas:
+    build:
+      context: ./servicio-boletas
+    container_name: servicio-boletas
+    ports:
+      - "8083:8083"
+    environment:
+      - EUREKA_SERVICE_URL=http://eureka-server:8761/eureka
+      - EUREKA_INSTANCE_HOSTNAME=servicio-boletas
+    depends_on:
+      - eureka-server
+      - servicio-consultas
+      - servicio-alternativas
+
+  servicio-gateway-server:
+    build:
+      context: ./servicio-gateway-server
+    container_name: servicio-gateway-server
+    ports:
+      - "8090:8090"
+    environment:
+      - EUREKA_SERVICE_URL=http://eureka-server:8761/eureka
+      - EUREKA_INSTANCE_HOSTNAME=servicio-gateway-server
+    depends_on:
+      - eureka-server
+      - servicio-consultas
+      - servicio-alternativas
+      - servicio-boletas
+
+volumes:
+  mysql_data:
+  postgres_data:
+
+# Nota: servicio-commons solo se compila, no se ejecuta como contenedor.
+# Antes de levantar el compose, asegúrate de compilar servicio-commons:
+# cd pe-votaciones-backend/servicio-commons && ./mvnw clean package
